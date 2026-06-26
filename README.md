@@ -19,9 +19,12 @@ MERN Stack training program.
 - **Filter** – All / Pending / Completed
 - **Sort** – Newest, Oldest, Priority, or Due Date
 - **Statistics dashboard** – live Total, Completed, Pending, and Overdue counts
+- **Completion progress bar** – shows the percentage of tasks done
+- **Overdue highlighting** – overdue tasks are clearly marked in red
 - **Clear completed** – delete all finished tasks at once
+- **Delete confirmation** – a confirmation popup before a task is removed
 - **Toast notifications** for every action and friendly error messages
-- **Responsive design** for mobile and desktop
+- **Modern dark UI** with smooth animations, responsive on mobile and desktop
 
 ## Tech Stack
 

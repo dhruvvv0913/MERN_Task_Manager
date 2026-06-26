@@ -156,9 +156,14 @@ function Dashboard() {
       </div>
 
       {loading ? (
-        <p className="info">Loading tasks...</p>
+        <div className="spinner-wrap">
+          <div className="spinner"></div>
+        </div>
       ) : visibleTasks.length === 0 ? (
-        <p className="info">No tasks to show.</p>
+        <div className="empty-state">
+          <span className="emoji">📝</span>
+          No tasks to show. Add one above!
+        </div>
       ) : (
         <ul className="task-list">
           {visibleTasks.map((task) => (

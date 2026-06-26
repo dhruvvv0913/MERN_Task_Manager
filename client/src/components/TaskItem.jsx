@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-// One row in the task list. It can switch into an "edit" mode.
+// One row in the task list. It can switch into an "edit" mode and
+// shows a confirmation popup before deleting.
 function TaskItem({ task, onToggle, onUpdate, onDelete }) {
   const [editing, setEditing] = useState(false);
+  const [confirming, setConfirming] = useState(false);
 
   // Local copies of the fields, used only while editing
   const [title, setTitle] = useState(task.title);
@@ -11,6 +13,10 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
   const [dueDate, setDueDate] = useState(
     task.dueDate ? task.dueDate.slice(0, 10) : ""
   );
+
+  // A task is overdue if it is not done and its due date is in the past
+  const isOverdue =
+    !task.completed && task.dueDate && new Date(task.dueDate) < new Date();
 
   function handleSave() {
     if (!title.trim()) return;
@@ -24,7 +30,6 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
   }
 
   function handleCancel() {
-    // Reset the fields back to the original task values
     setTitle(task.title);
     setDescription(task.description);
     setPriority(task.priority);
@@ -66,7 +71,13 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
 
   // ----- Normal view -----
   return (
-    <li className={"task-item" + (task.completed ? " completed" : "")}>
+    <li
+      className={
+        "task-item" +
+        (task.completed ? " completed" : "") +
+        (isOverdue ? " overdue" : "")
+      }
+    >
       <input
         type="checkbox"
         checked={task.completed}
@@ -82,18 +93,43 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
         </div>
         {task.description && <p className="task-desc">{task.description}</p>}
         {task.dueDate && (
-          <p className="task-due">
+          <p className={"task-due" + (isOverdue ? " overdue-text" : "")}>
             Due: {new Date(task.dueDate).toLocaleDateString()}
+            {isOverdue ? " (overdue)" : ""}
           </p>
         )}
       </div>
 
       <div className="task-buttons">
         <button onClick={() => setEditing(true)}>Edit</button>
-        <button className="danger" onClick={() => onDelete(task._id)}>
+        <button className="danger" onClick={() => setConfirming(true)}>
           Delete
         </button>
       </div>
+
+      {/* Confirmation popup, shown only when the Delete button was clicked */}
+      {confirming && (
+        <div className="modal-overlay" onClick={() => setConfirming(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p>Delete this task?</p>
+            <p className="modal-task">"{task.title}"</p>
+            <div className="modal-buttons">
+              <button className="secondary" onClick={() => setConfirming(false)}>
+                Cancel
+              </button>
+              <button
+                className="danger"
+                onClick={() => {
+                  onDelete(task._id);
+                  setConfirming(false);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </li>
   );
 }
