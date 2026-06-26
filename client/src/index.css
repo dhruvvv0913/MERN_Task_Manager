@@ -1,0 +1,373 @@
+/* ---------- Basic reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef2ff;
+  color: #1e293b;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #4f46e5;
+  color: white;
+  padding: 14px 20px;
+}
+
+.navbar .logo {
+  font-size: 20px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-right button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: white;
+  color: #4f46e5;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ---------- Page container ---------- */
+.container {
+  max-width: 700px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+/* ---------- Auth pages (login / register) ---------- */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.auth-card {
+  background-color: white;
+  width: 100%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  color: #4f46e5;
+}
+
+.auth-card label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+.auth-card input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.auth-card button {
+  margin-top: 18px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4f46e5;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.auth-card button:disabled {
+  background-color: #a5b4fc;
+  cursor: default;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.switch a {
+  color: #4f46e5;
+}
+
+/* ---------- Stats dashboard ---------- */
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.stat-box {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ---------- Task form ---------- */
+.task-form {
+  background-color: white;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-form input,
+.task-form select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row select,
+.form-row input {
+  flex: 1;
+}
+
+.task-form button,
+.task-buttons button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ---------- Toolbar (search / filter / sort) ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.toolbar .search {
+  flex: 1;
+  min-width: 160px;
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+}
+
+.filters button {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  background-color: white;
+  color: #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filters button.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
+
+.toolbar select {
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.08);
+}
+
+.task-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: #4f46e5;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-title {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.task-desc {
+  font-size: 14px;
+  color: #475569;
+  margin-top: 4px;
+}
+
+.task-due {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+/* Priority badge colours */
+.badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: white;
+}
+
+.badge.low {
+  background-color: #22c55e;
+}
+
+.badge.medium {
+  background-color: #f59e0b;
+}
+
+.badge.high {
+  background-color: #ef4444;
+}
+
+/* Task buttons */
+.task-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.task-buttons .secondary {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.task-buttons .danger {
+  background-color: #ef4444;
+}
+
+/* Edit mode lays the fields out in a column */
+.task-item.editing {
+  flex-direction: column;
+}
+
+.task-item.editing input,
+.task-item.editing select {
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* ---------- Misc ---------- */
+.info {
+  text-align: center;
+  color: #64748b;
+  margin: 20px 0;
+}
+
+.clear-btn {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.clear-btn:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 500px) {
+  .stats {
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    min-width: 40%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Environment variables (keep secrets out of GitHub)
+.env
+
+# Production build output
+dist/
+build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
