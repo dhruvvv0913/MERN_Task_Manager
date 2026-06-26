@@ -146,5 +146,9 @@ user's task return `403 Forbidden`.
 
 ## Live Demo
 
-- **Frontend:** _(added after deployment)_
-- **Backend API:** _(added after deployment)_
+- **Frontend (app):** https://mern-task-manager-khaki.vercel.app
+- **Backend API:** https://task-manager-api-v663.onrender.com
+
+> Note: the backend is hosted on Render's free tier, which sleeps after periods of
+> inactivity. The first request after it has been idle may take ~30-50 seconds to
+> wake up; after that it responds normally.
