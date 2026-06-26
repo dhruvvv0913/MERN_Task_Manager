@@ -8,6 +8,10 @@ statistics about their workload.
 This is the **Major Project** for the InternsElite Full Stack Web Development &
 MERN Stack training program.
 
+## Screenshot
+
+![Task Manager dashboard](screenshot.png)
+
 ## Features
 
 - **Authentication** – register and log in with JWT; passwords hashed with bcrypt

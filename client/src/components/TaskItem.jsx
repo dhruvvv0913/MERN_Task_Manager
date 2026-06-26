@@ -14,9 +14,14 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
     task.dueDate ? task.dueDate.slice(0, 10) : ""
   );
 
-  // A task is overdue if it is not done and its due date is in the past
-  const isOverdue =
-    !task.completed && task.dueDate && new Date(task.dueDate) < new Date();
+  // Work out if a task is overdue or due within the next 2 days
+  const now = new Date();
+  const due = task.dueDate ? new Date(task.dueDate) : null;
+  const TWO_DAYS = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds
+
+  const isOverdue = !task.completed && due && due < now;
+  const isDueSoon =
+    !task.completed && due && !isOverdue && due - now <= TWO_DAYS;
 
   function handleSave() {
     if (!title.trim()) return;
@@ -75,7 +80,8 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
       className={
         "task-item" +
         (task.completed ? " completed" : "") +
-        (isOverdue ? " overdue" : "")
+        (isOverdue ? " overdue" : "") +
+        (isDueSoon ? " due-soon" : "")
       }
     >
       <input
@@ -93,9 +99,16 @@ function TaskItem({ task, onToggle, onUpdate, onDelete }) {
         </div>
         {task.description && <p className="task-desc">{task.description}</p>}
         {task.dueDate && (
-          <p className={"task-due" + (isOverdue ? " overdue-text" : "")}>
+          <p
+            className={
+              "task-due" +
+              (isOverdue ? " overdue-text" : "") +
+              (isDueSoon ? " due-soon-text" : "")
+            }
+          >
             Due: {new Date(task.dueDate).toLocaleDateString()}
             {isOverdue ? " (overdue)" : ""}
+            {isDueSoon ? " (due soon)" : ""}
           </p>
         )}
       </div>

@@ -14,4 +14,20 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// If the server ever says 401 (token missing/expired/invalid),
+// log the user out and send them back to the login page.
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default api;

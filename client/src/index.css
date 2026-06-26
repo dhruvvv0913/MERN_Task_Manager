@@ -268,6 +268,10 @@ body {
 .task-item.overdue { border-left: 4px solid var(--danger); }
 .task-due.overdue-text { color: var(--danger-2); font-weight: 600; }
 
+/* Tasks due within the next 2 days */
+.task-item.due-soon { border-left: 4px solid #f59e0b; }
+.task-due.due-soon-text { color: #fbbf24; font-weight: 600; }
+
 /* Priority badges */
 .badge { font-size: 11px; padding: 3px 9px; border-radius: 12px; color: #fff; font-weight: 600; }
 .badge.low { background: #22c55e; }
