@@ -1,3 +1,5 @@
+import CountUp from "./CountUp";
+
 // The dashboard showing live counts and a completion progress bar
 function Stats({ tasks }) {
   const total = tasks.length;
@@ -17,19 +19,19 @@ function Stats({ tasks }) {
     <>
       <div className="stats">
         <div className="stat-box">
-          <span className="stat-number">{total}</span>
+          <span className="stat-number"><CountUp value={total} /></span>
           <span className="stat-label">Total</span>
         </div>
         <div className="stat-box">
-          <span className="stat-number">{completed}</span>
+          <span className="stat-number"><CountUp value={completed} /></span>
           <span className="stat-label">Completed</span>
         </div>
         <div className="stat-box">
-          <span className="stat-number">{pending}</span>
+          <span className="stat-number"><CountUp value={pending} /></span>
           <span className="stat-label">Pending</span>
         </div>
         <div className="stat-box">
-          <span className="stat-number">{overdue}</span>
+          <span className="stat-number"><CountUp value={overdue} /></span>
           <span className="stat-label">Overdue</span>
         </div>
       </div>

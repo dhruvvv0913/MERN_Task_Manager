@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import confetti from "canvas-confetti";
 import api from "../api";
+import { useAuth } from "../context/AuthContext";
 import TaskForm from "../components/TaskForm";
 import TaskItem from "../components/TaskItem";
 import Stats from "../components/Stats";
 
 function Dashboard() {
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Used to fire confetti only at the moment everything becomes completed
+  const allDoneRef = useRef(false);
 
   // Toolbar controls
   const [filter, setFilter] = useState("all"); // all | active | completed
@@ -18,6 +24,28 @@ function Dashboard() {
   useEffect(() => {
     loadTasks();
   }, []);
+
+  // Celebrate with confetti when every task becomes completed
+  useEffect(() => {
+    const total = tasks.length;
+    const done = tasks.filter((t) => t.completed).length;
+    const allDone = total > 0 && done === total;
+
+    if (allDone && !allDoneRef.current) {
+      confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+    }
+    allDoneRef.current = allDone;
+  }, [tasks]);
+
+  // A friendly greeting based on the time of day
+  const hour = new Date().getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const today = new Date().toLocaleDateString(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
 
   async function loadTasks() {
     try {
@@ -114,6 +142,13 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <div className="dash-header">
+        <h2>
+          {greeting}, {user?.name} 👋
+        </h2>
+        <p>{today}</p>
+      </div>
+
       <Stats tasks={tasks} />
 
       <TaskForm onAdd={addTask} />
@@ -156,8 +191,13 @@ function Dashboard() {
       </div>
 
       {loading ? (
-        <div className="spinner-wrap">
-          <div className="spinner"></div>
+        <div className="task-list">
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="skeleton-item">
+              <div className="skeleton-line short"></div>
+              <div className="skeleton-line"></div>
+            </div>
+          ))}
         </div>
       ) : visibleTasks.length === 0 ? (
         <div className="empty-state">
